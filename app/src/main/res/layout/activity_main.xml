@@ -11,7 +11,47 @@
     tools:context="com.example.nicta.gdb.MainActivity">
 
     <TextView
+        android:text="Gwent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="12dp"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="The Deck Builder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_green_dark" />
+
+    <Button
+        android:text="Création de deck"
+        android:layout_height="100dp"
+        android:id="@+id/btnCreationDeck"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnCollectionCartes"
+        android:layout_alignStart="@+id/btnCollectionCartes"
+        android:layout_marginBottom="80dp"
+        android:layout_width="250dp"
+        android:textSize="20sp" />
+
+    <Button
+        android:text="Collection des cartes"
+        android:layout_height="100dp"
+        android:layout_marginTop="59dp"
+        android:id="@+id/btnCollectionCartes"
+        android:elevation="0dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:textSize="20sp" />
 </RelativeLayout>
