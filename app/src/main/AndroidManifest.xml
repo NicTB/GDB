@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CollectionActivity" />
-        <activity android:name=".CreationActivity"></activity>
+        <activity android:name=".CreationActivity" />
+        <activity android:name=".AfficherCarteActivity"></activity>
     </application>
 
 </manifest>

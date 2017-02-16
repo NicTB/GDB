@@ -10,13 +10,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.nicta.gdb.CollectionActivity">
 
-    <TextView
-        android:text="COLLECTION"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="178dp"
-        android:id="@+id/textView3"
-        android:textSize="36sp"
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/dialog_carte"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:text="Filtrer"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnFiltre"
+            android:layout_width="165dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.27" />
+
+        <Button
+            android:text="Chercher"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnChercher"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/btnFiltre"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="165dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>
