@@ -1,11 +1,35 @@
 package com.example.nicta.gdb;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import retrofit.Callback;
+import retrofit.RequestInterceptor;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.OkClient;
+import retrofit.client.Response;
+
 public class CollectionActivity extends AppCompatActivity {
+
+    private ArrayList<TrioCarte> cartes = new ArrayList<TrioCarte>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +39,41 @@ public class CollectionActivity extends AppCompatActivity {
         Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
         Button btnChercher = (Button) findViewById(R.id.btnChercher);
 
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://d75e14.sv55.cmaisonneuve.qc.ca/")
+                .setClient(new OkClient())
+                .build();
+
+        JsonService jsonService = restAdapter.create(JsonService.class);
+
+        Callback<List<Carte>> callback = new Callback<List<Carte>>() {
+            @Override
+            public void success(List<Carte> liste, Response response) {
+                cartes.clear();
+                for (int i =0;i<liste.size();i++) {
+                    Carte c1,c2,c3;
+                    try{
+                        c1 = liste.get(i);
+                        c2 = liste.get(i++);
+                        c3 = liste.get(i++);
+                    }
+                    finally{
+
+                    }
+                    TrioCarte tc = new TrioCarte(c1,c2,c3);
+                    cartes.add(tc);
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                String errorString = error.toString();
+
+            }
+        };
+
+        jsonService.getCartes(callback);
 
 
         /*
@@ -35,5 +94,6 @@ public class CollectionActivity extends AppCompatActivity {
                 cdd.show();
             }
         });*/
+
     }
 }
