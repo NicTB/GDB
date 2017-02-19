@@ -20,7 +20,6 @@ public class AfficherCarteActivity extends Dialog implements android.view.View.O
 
     public AfficherCarteActivity(Activity a, Carte ca) {
         super(a);
-        // TODO Auto-generated constructor stub
         carte = ca;
         this.c = a;
     }

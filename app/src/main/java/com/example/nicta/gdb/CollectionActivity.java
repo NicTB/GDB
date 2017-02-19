@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -28,8 +29,10 @@ import retrofit.client.Response;
 
 public class CollectionActivity extends AppCompatActivity {
 
-    private ArrayList<TrioCarte> cartes = new ArrayList<TrioCarte>();
-
+    private ArrayList<Carte> cartes = new ArrayList<Carte>();
+    private ArrayList<Carte> cartesAAfficher = new ArrayList<Carte>();
+    CollectionAdapter adapter;
+    private ListView listeCartes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class CollectionActivity extends AppCompatActivity {
 
         Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
         Button btnChercher = (Button) findViewById(R.id.btnChercher);
+        listeCartes = (ListView) findViewById(R.id.listeCarte);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://d75e14.sv55.cmaisonneuve.qc.ca/")
@@ -50,20 +54,12 @@ public class CollectionActivity extends AppCompatActivity {
             @Override
             public void success(List<Carte> liste, Response response) {
                 cartes.clear();
-                for (int i =0;i<liste.size();i++) {
-                    Carte c1,c2,c3;
-                    try{
-                        c1 = liste.get(i);
-                        c2 = liste.get(i++);
-                        c3 = liste.get(i++);
-                    }
-                    finally{
-
-                    }
-                    TrioCarte tc = new TrioCarte(c1,c2,c3);
-                    cartes.add(tc);
+                for (Carte c : liste) {
+                    cartes.add(c);
+                    cartesAAfficher.add(c);
                 }
 
+                rafraichirListe();
             }
 
             @Override
@@ -96,4 +92,10 @@ public class CollectionActivity extends AppCompatActivity {
         });*/
 
     }
+
+    protected void rafraichirListe(){
+        adapter = new CollectionAdapter(getBaseContext(),R.layout.collection_carte, cartesAAfficher);
+        listeCartes.setAdapter(adapter);
+    }
+
 }
