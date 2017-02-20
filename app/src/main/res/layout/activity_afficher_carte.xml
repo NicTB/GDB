@@ -11,27 +11,59 @@
 
 
     <ImageView
-        android:layout_width="197dp"
-        android:layout_height="160dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imgAfficherCarte" />
+        android:layout_width="203dp"
+        android:layout_height="225dp"
+        app:srcCompat="@mipmap/gwent"
+        android:id="@+id/imgAfficherCarte"
+        android:layout_weight="0.07" />
 
     <TextView
-        android:text="nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:id="@+id/txtViewNom"
+        android:textSize="18sp"
+        android:text="nom" />
 
     <TextView
         android:text="capacite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
+        android:id="@+id/txtViewCapacite"
+        android:textSize="12sp" />
 
     <TextView
-        android:text="loyauté"
+        android:text="type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6" />
+        android:id="@+id/txtViewType"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="faction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtViewFaction"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtViewPosition"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="loyaute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtViewLoyaute"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="coutCreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtViewCout"
+        android:textSize="18sp" />
 
 </LinearLayout>

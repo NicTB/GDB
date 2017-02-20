@@ -9,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Carte {
 
+    @Expose @SerializedName("id")
+    public int id;
     @Expose @SerializedName("nom")
     public String nom;
     @Expose @SerializedName("type")

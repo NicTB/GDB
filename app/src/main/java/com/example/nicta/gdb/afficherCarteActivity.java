@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AfficherCarteActivity extends Dialog implements android.view.View.OnClickListener {
@@ -31,11 +32,28 @@ public class AfficherCarteActivity extends Dialog implements android.view.View.O
         setContentView(R.layout.activity_afficher_carte);
 
         ImageView imgAfficherCarte = (ImageView) findViewById(R.id.imgAfficherCarte);
+        TextView txtViewNom = (TextView) findViewById(R.id.txtViewNom);
+        TextView txtViewCapacite = (TextView) findViewById(R.id.txtViewCapacite);
+        TextView txtViewType = (TextView) findViewById(R.id.txtViewType);
+        TextView txtViewFaction = (TextView) findViewById(R.id.txtViewFaction);
+        TextView txtViewPosition = (TextView) findViewById(R.id.txtViewPosition);
+        TextView txtViewLoyaute = (TextView) findViewById(R.id.txtViewLoyaute);
+        TextView txtViewCout = (TextView) findViewById(R.id.txtViewCout);
+
+
         String nomImage = carte.image;
 
         Context context = imgAfficherCarte.getContext();
         int id = context.getResources().getIdentifier(nomImage, "drawable", context.getPackageName());
         imgAfficherCarte.setImageResource(id);
+
+        txtViewNom.setText(carte.nom);
+        txtViewCapacite.setText(carte.capacite);
+        txtViewType.setText("Type : " + Enums.Type.valueOf(carte.type).toString());
+        txtViewFaction.setText("Faction : " + Enums.Faction.valueOf(carte.faction).toString());
+        txtViewPosition.setText("Position : " + Enums.Position.valueOf(carte.position).toString());
+        txtViewLoyaute.setText("Loyauté : " + Enums.Loyaute.valueOf(carte.loyaute).toString());
+        txtViewCout.setText("Cout de création : " + String.valueOf(carte.coutCreation));
     }
 
     @Override
