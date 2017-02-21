@@ -17,7 +17,7 @@ public interface JsonService {
     @GET("/mobile/GetTags")
     void getTags(Callback<List<Tags>> tagsCallback);
 
-    @GET("/mobile/GetTagCarte")
+    @GET("/mobile/GetTagsCartes")
     void getTagCarte(Callback<List<TagCarte>> tagCarteCallback);
 
 

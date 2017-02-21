@@ -121,17 +121,10 @@ public class CollectionActivity extends AppCompatActivity {
             ArrayList<TagCarte> tagCartes = fc.getTagCarte();
             ArrayList<Tags> tags = fc.getTags();
             ArrayList<Integer> idsCarte = new ArrayList<>();
-            ArrayList<Integer> idsCarteBL = new ArrayList<>();
             Tags t = tags.get(filtreTag-1); // Trouve le tag
             for(TagCarte tc : tagCartes){
                 if(tc.idTag==t.id){ //Si les id correspondent, on veut cette carte
                     idsCarte.add(tc.idCarte);
-                    idsCarteBL.remove(tc.idCarte); // Si la carte a plusieurs tags, on la veut
-                }
-                else{ // Si les id ne correspondent pas, on ne veut pas cette carte
-                    if(!idsCarte.contains(tc.idCarte)){
-                        idsCarteBL.add(tc.idCarte);
-                    }
                 }
             }
             for(Carte c : cartes){
@@ -143,26 +136,66 @@ public class CollectionActivity extends AppCompatActivity {
         else{ // S'il n'y a pas de tag sélectionné, on prend toutes les cartes
             cartesAAfficher.addAll(cartes);
         }
-
+        ArrayList<Carte> temp = new ArrayList<>();
         /**********************   FILTRE PAR FACTION     ************************/
         if(filtreFaction>0){ // Si une faction à été sélectionnée
-            ArrayList<Carte> tempFaction = new ArrayList<>();
+            temp = new ArrayList<>();
             for(Carte c : cartesAAfficher){ // On itère sur les cartes restantes
                 if(filtreFaction-1 != c.faction){ // On ne veut pas celles qui ne font pas partie de la faction
-                    tempFaction.add(c); // on met les cartes dans une autre liste pour les enlever plus facilement (on ne peut pas directement dans la boucle foreach)
+                    temp.add(c); // on met les cartes dans une autre liste pour les enlever plus facilement (on ne peut pas directement dans la boucle foreach)
                 }
             }
-            cartesAAfficher.removeAll(tempFaction); // on enlève les cartes qui ne font pas partie de la faction sélectionnée
+            cartesAAfficher.removeAll(temp); // on enlève les cartes qui ne font pas partie de la faction sélectionnée
         }
 
+        /**********************   FILTRE PAR TYPE     ************************/
 
+        temp.clear();
+        for(int i = 0;i < 4;i++){
+            if(!filtreType.get(i)){
+                for(Carte c : cartesAAfficher){
+                    if(c.type == i){
+                        temp.add(c);
+                    }
+                }
+            }
+        }
+        cartesAAfficher.removeAll(temp);
 
-        /*
-        //filtreFaction
-        //filtreTag
-        filtreRarete
-        filtreType
-        */
+        /**********************   FILTRE PAR RARETÉ     ************************/
+
+        temp.clear();
+        if(!filtreRarete.get(0)){ // Carte créées et communes
+            for(Carte c : cartesAAfficher){
+                if(c.coutCreation <= 30 ){
+                    temp.add(c);
+                }
+            }
+        }
+        if(!filtreRarete.get(1)){ // Cartes rares
+            for(Carte c : cartesAAfficher){
+                if(c.coutCreation == 80 ){
+                    temp.add(c);
+                }
+            }
+        }
+        if(!filtreRarete.get(2)){ // Cartes épiques
+            for(Carte c : cartesAAfficher){
+                if(c.coutCreation == 200 ){
+                    temp.add(c);
+                }
+            }
+        }
+        if(!filtreRarete.get(3)){ // Cartes légendaires
+            for(Carte c : cartesAAfficher){
+                if(c.coutCreation == 800 ){
+                    temp.add(c);
+                }
+            }
+        }
+
+        cartesAAfficher.removeAll(temp);
+
     }
 
 }
