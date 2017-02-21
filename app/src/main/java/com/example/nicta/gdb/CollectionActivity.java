@@ -1,8 +1,6 @@
 package com.example.nicta.gdb;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,24 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
-import retrofit.Callback;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.OkClient;
-import retrofit.client.Response;
 
 public class CollectionActivity extends AppCompatActivity {
 
@@ -53,8 +40,36 @@ public class CollectionActivity extends AppCompatActivity {
         checkListesFiltre();
 
         Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
-        Button btnChercher = (Button) findViewById(R.id.btnChercher);
         listeCartes = (ListView) findViewById(R.id.listeCarte);
+        SearchView chercherCarte = (SearchView) findViewById(R.id.chercherCarte);
+
+        chercherCarte.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filtrerListeCartesAAfficher();
+                ArrayList<Carte> temp = new ArrayList<Carte>();
+                for (Carte c : cartesAAfficher) { // Cherche le nom dans les cartes affichées présentement (tient compte des filtres)
+                    if (c.nom.toLowerCase().contains(query.toLowerCase())) {
+                        temp.add(c);
+                    }
+                }
+
+                cartesAAfficher.clear();
+                cartesAAfficher.addAll(temp);
+                rafraichirListe();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.length()==0){
+                    filtrerListeCartesAAfficher();
+                    rafraichirListe();
+                }
+
+                return false;
+            }
+        });
 
         btnFiltre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +83,7 @@ public class CollectionActivity extends AppCompatActivity {
             }
         });
 
-        btnChercher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         filtrerListeCartesAAfficher();
         rafraichirListe();
@@ -151,51 +161,64 @@ public class CollectionActivity extends AppCompatActivity {
         /**********************   FILTRE PAR TYPE     ************************/
 
         temp.clear();
-        for(int i = 0;i < 4;i++){
-            if(!filtreType.get(i)){
-                for(Carte c : cartesAAfficher){
-                    if(c.type == i){
+        int count = 0;
+        for(boolean b : filtreType){
+            if(!b)
+                count++; // Compte le nombre de faux
+        }
+        if(count<4) { // S'il y a 4 faux, ne filtre pas le type
+            for (int i = 0; i < 4; i++) {
+                if (!filtreType.get(i)) {
+                    count++;
+                    for (Carte c : cartesAAfficher) {
+                        if (c.type == i) {
+                            temp.add(c);
+                        }
+                    }
+                }
+            }
+            cartesAAfficher.removeAll(temp);
+        }
+        /**********************   FILTRE PAR RARETÉ     ************************/
+
+        temp.clear();
+        count = 0;
+        for(boolean b : filtreRarete){
+            if(!b)
+                count++; // Compte le nombre de faux
+        }
+        if(count<4) { // S'il y a 4 faux, ne filtre pas la rareté{
+            if (!filtreRarete.get(0)) { // Carte créées et communes
+                for (Carte c : cartesAAfficher) {
+                    if (c.coutCreation <= 30) {
                         temp.add(c);
                     }
                 }
             }
-        }
-        cartesAAfficher.removeAll(temp);
-
-        /**********************   FILTRE PAR RARETÉ     ************************/
-
-        temp.clear();
-        if(!filtreRarete.get(0)){ // Carte créées et communes
-            for(Carte c : cartesAAfficher){
-                if(c.coutCreation <= 30 ){
-                    temp.add(c);
+            if (!filtreRarete.get(1)) { // Cartes rares
+                for (Carte c : cartesAAfficher) {
+                    if (c.coutCreation == 80) {
+                        temp.add(c);
+                    }
                 }
             }
-        }
-        if(!filtreRarete.get(1)){ // Cartes rares
-            for(Carte c : cartesAAfficher){
-                if(c.coutCreation == 80 ){
-                    temp.add(c);
+            if (!filtreRarete.get(2)) { // Cartes épiques
+                for (Carte c : cartesAAfficher) {
+                    if (c.coutCreation == 200) {
+                        temp.add(c);
+                    }
                 }
             }
-        }
-        if(!filtreRarete.get(2)){ // Cartes épiques
-            for(Carte c : cartesAAfficher){
-                if(c.coutCreation == 200 ){
-                    temp.add(c);
+            if (!filtreRarete.get(3)) { // Cartes légendaires
+                for (Carte c : cartesAAfficher) {
+                    if (c.coutCreation == 800) {
+                        temp.add(c);
+                    }
                 }
             }
-        }
-        if(!filtreRarete.get(3)){ // Cartes légendaires
-            for(Carte c : cartesAAfficher){
-                if(c.coutCreation == 800 ){
-                    temp.add(c);
-                }
-            }
-        }
 
-        cartesAAfficher.removeAll(temp);
-
+            cartesAAfficher.removeAll(temp);
+        }
     }
 
 }

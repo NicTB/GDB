@@ -46,17 +46,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:text="Chercher"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnChercher"
-            android:layout_marginLeft="14dp"
-            android:layout_marginStart="14dp"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/btnFiltre"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="130dp" />
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/chercherCarte" />
 
     </LinearLayout>
 
