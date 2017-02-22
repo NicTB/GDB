@@ -10,13 +10,78 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.nicta.gdb.CreationActivity">
 
-    <TextView
-        android:text="CRÉATION"
+    <Button
+        android:text="Mes decks&#10;partagés"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:id="@+id/textView4"
-        android:textSize="36sp"
-        android:layout_alignParentTop="true"
+        android:id="@+id/btnDecksPartages"
+        android:textSize="12sp"
+        android:layout_alignTop="@+id/btnCreerDeck"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Chercher&#10;un deck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnChercherDeck"
+        android:textSize="12sp"
+        android:layout_alignBaseline="@+id/btnDecksPartages"
+        android:layout_alignBottom="@+id/btnDecksPartages"
+        android:layout_toRightOf="@+id/btnDecksPartages"
+        android:layout_toEndOf="@+id/btnDecksPartages"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
+
+    <TextView
+        android:text="Gestion des decks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:id="@+id/textView7"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:text="Créer&#10;un deck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCreerDeck"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_below="@+id/textView7"
+        android:layout_toLeftOf="@+id/btnDecksPartages"
+        android:layout_toStartOf="@+id/btnDecksPartages" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/btnDecksPartages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_height="300dp"
+        android:scrollbars="horizontal" />
+
+    <Button
+        android:text="Supprimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSupprimerDeck"
+        android:layout_alignBaseline="@+id/btnModifierDeck"
+        android:layout_alignBottom="@+id/btnModifierDeck"
+        android:layout_toRightOf="@+id/btnDecksPartages"
+        android:layout_toEndOf="@+id/btnDecksPartages" />
+
+    <Button
+        android:text="Modifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnModifierDeck"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btnDecksPartages"
+        android:layout_toStartOf="@+id/btnDecksPartages" />
+
 </RelativeLayout>

@@ -3,21 +3,16 @@ package com.example.nicta.gdb;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AfficherCarteActivity extends Dialog {
 
-
     public Activity c;
     public Carte carte;
-    public Dialog d;
 
     public AfficherCarteActivity(Activity a, Carte ca) {
         super(a);
@@ -40,7 +35,6 @@ public class AfficherCarteActivity extends Dialog {
         TextView txtViewLoyaute = (TextView) findViewById(R.id.txtViewLoyaute);
         TextView txtViewCout = (TextView) findViewById(R.id.txtViewCout);
 
-
         String nomImage = carte.image;
 
         Context context = imgAfficherCarte.getContext();
@@ -56,4 +50,9 @@ public class AfficherCarteActivity extends Dialog {
         txtViewCout.setText("Crafting cost : " + String.valueOf(carte.coutCreation) + " scraps");
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.dismiss(); // ferme le dialogue si on clique dessus
+        return true;
+    }
 }
