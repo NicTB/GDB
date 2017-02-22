@@ -84,8 +84,6 @@ public class FiltreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 miseAJourFiltre();
-                /*Intent intent = new Intent(FiltreActivity.this,CollectionActivity.class);
-                startActivity(intent);*/
                 finish();
             }
         });
