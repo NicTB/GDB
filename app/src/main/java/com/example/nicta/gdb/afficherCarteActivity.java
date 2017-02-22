@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AfficherCarteActivity extends Dialog implements android.view.View.OnClickListener {
+public class AfficherCarteActivity extends Dialog {
 
 
     public Activity c;
@@ -56,8 +56,4 @@ public class AfficherCarteActivity extends Dialog implements android.view.View.O
         txtViewCout.setText("Crafting cost : " + String.valueOf(carte.coutCreation) + " scraps");
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }
