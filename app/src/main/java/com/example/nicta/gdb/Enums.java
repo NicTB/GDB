@@ -74,7 +74,8 @@ public class Enums {
         Melee(0),
         Ranged(1),
         Siege(2),
-        Event(3);
+        Event(3),
+        Agile(4);
 
         private int value;
         private Position(int value){
