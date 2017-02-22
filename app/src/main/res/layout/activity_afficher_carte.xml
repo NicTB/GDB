@@ -11,59 +11,69 @@
 
 
     <ImageView
-        android:layout_width="203dp"
-        android:layout_height="225dp"
+        android:layout_width="match_parent"
+        android:layout_height="191dp"
         app:srcCompat="@mipmap/gwent"
         android:id="@+id/imgAfficherCarte"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.45" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewNom"
         android:textSize="18sp"
-        android:text="nom" />
+        android:text="nom"
+        android:paddingLeft="5sp" />
 
     <TextView
         android:text="capacite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewCapacite"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_weight="0.14"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp" />
 
     <TextView
         android:text="type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewType"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingLeft="5sp" />
 
     <TextView
         android:text="faction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewFaction"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingLeft="5sp" />
 
     <TextView
         android:text="position"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewPosition"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingLeft="5sp" />
 
     <TextView
         android:text="loyaute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewLoyaute"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingLeft="5sp" />
 
     <TextView
         android:text="coutCreation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewCout"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_weight="0.07"
+        android:paddingLeft="5sp" />
 
 </LinearLayout>

@@ -16,11 +16,6 @@ import java.util.Objects;
 
 public class FiltreActivity extends AppCompatActivity {
 
-    private int filtreFaction;
-    private int filtreTag;
-    private ArrayList<Boolean> filtreRarete;
-    private ArrayList<Boolean> filtreType;
-
     private Spinner spinFaction; //Sélection de faction
     private Spinner spinTags; //Sélection de tag
 
@@ -30,19 +25,12 @@ public class FiltreActivity extends AppCompatActivity {
 
     ArrayList<CheckBox> checksType;
     ArrayList<CheckBox> checksRarete;
-
+    FournisseurCartes fc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtre);
-        FournisseurCartes fc = FournisseurCartes.getInstance();
-
-        Intent intent = getIntent();
-        filtreFaction = intent.getIntExtra("filtreFaction",0);
-        filtreTag = intent.getIntExtra("filtreTag",0);
-        filtreRarete = (ArrayList<Boolean>) intent.getSerializableExtra("filtreRarete");
-        filtreType = (ArrayList<Boolean>) intent.getSerializableExtra("filtreType");
-
+        fc = FournisseurCartes.getInstance();
 
         spinFaction = (Spinner) findViewById(R.id.spinFaction);
         spinTags = (Spinner) findViewById(R.id.spinTags);
@@ -82,39 +70,36 @@ public class FiltreActivity extends AppCompatActivity {
 
 
         // Initialisation des filtres sélectionnés
-        spinFaction.setSelection(filtreFaction);
-        spinTags.setSelection(filtreTag);
+        spinFaction.setSelection(fc.filtreFaction);
+        spinTags.setSelection(fc.filtreTag);
 
 
         // Checkbox pour les types et les raretés
         for(int i =0; i<4; i++){
-            checksType.get(i).setChecked(filtreType.get(i));
-            checksRarete.get(i).setChecked(filtreRarete.get(i));
+            checksType.get(i).setChecked(fc.filtreType.get(i));
+            checksRarete.get(i).setChecked(fc.filtreRarete.get(i));
         }
 
         btnConfirmerFiltre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FiltreActivity.this,CollectionActivity.class);
                 miseAJourFiltre();
-                intent.putExtra("filtreFaction", filtreFaction);
-                intent.putExtra("filtreTag", filtreTag);
-                intent.putExtra("filtreRarete", filtreRarete);
-                intent.putExtra("filtreType", filtreType);
-                startActivity(intent);
+                /*Intent intent = new Intent(FiltreActivity.this,CollectionActivity.class);
+                startActivity(intent);*/
+                finish();
             }
         });
     }
 
 
     protected void miseAJourFiltre(){
-        filtreFaction = spinFaction.getSelectedItemPosition();
-        filtreTag = spinTags.getSelectedItemPosition();
-        filtreType = new ArrayList<>();
-        filtreRarete = new ArrayList<>();
+        fc.filtreFaction = spinFaction.getSelectedItemPosition();
+        fc.filtreTag = spinTags.getSelectedItemPosition();
+        fc.filtreType = new ArrayList<>();
+        fc.filtreRarete = new ArrayList<>();
         for(int i =0; i<4; i++){
-            filtreType.add(checksType.get(i).isChecked());
-            filtreRarete.add(checksRarete.get(i).isChecked());
+            fc.filtreType.add(checksType.get(i).isChecked());
+            fc.filtreRarete.add(checksRarete.get(i).isChecked());
         }
 
     }

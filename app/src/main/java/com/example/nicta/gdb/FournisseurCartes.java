@@ -50,7 +50,6 @@ public class FournisseurCartes {
             @Override
             public void failure(RetrofitError error) {
                 String errorString = error.toString();
-
             }
         };
 
@@ -100,4 +99,11 @@ public class FournisseurCartes {
     public ArrayList<TagCarte> getTagCarte(){
         return tagCarte;
     }
+
+    public int filtreFaction;
+    public int filtreTag;
+    public ArrayList<Boolean> filtreRarete;
+    public ArrayList<Boolean> filtreType;
+
+
 }

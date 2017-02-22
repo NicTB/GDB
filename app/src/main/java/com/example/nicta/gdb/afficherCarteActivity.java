@@ -52,8 +52,8 @@ public class AfficherCarteActivity extends Dialog implements android.view.View.O
         txtViewType.setText("Type : " + Enums.Type.valueOf(carte.type).toString());
         txtViewFaction.setText("Faction : " + Enums.Faction.valueOf(carte.faction).toString());
         txtViewPosition.setText("Position : " + Enums.Position.valueOf(carte.position).toString());
-        txtViewLoyaute.setText("Loyauté : " + Enums.Loyaute.valueOf(carte.loyaute).toString());
-        txtViewCout.setText("Cout de création : " + String.valueOf(carte.coutCreation));
+        txtViewLoyaute.setText("Loyalty : " + Enums.Loyaute.valueOf(carte.loyaute).toString());
+        txtViewCout.setText("Crafting cost : " + String.valueOf(carte.coutCreation) + " scraps");
     }
 
     @Override

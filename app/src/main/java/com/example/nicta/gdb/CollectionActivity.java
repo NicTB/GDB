@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,10 +22,6 @@ public class CollectionActivity extends AppCompatActivity {
     private ArrayList<Carte> cartesAAfficher;
     CollectionAdapter adapter;
     private ListView listeCartes;
-    int filtreFaction;
-    int filtreTag;
-    ArrayList<Boolean> filtreRarete;
-    ArrayList<Boolean> filtreType;
     FournisseurCartes fc;
 
     @Override
@@ -32,11 +29,6 @@ public class CollectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
         fc = FournisseurCartes.getInstance();
-        Intent intent = getIntent();
-        filtreFaction = intent.getIntExtra("filtreFaction",0);
-        filtreTag = intent.getIntExtra("filtreTag",0);
-        filtreRarete = (ArrayList<Boolean>) intent.getSerializableExtra("filtreRarete");
-        filtreType = (ArrayList<Boolean>) intent.getSerializableExtra("filtreType");
         checkListesFiltre();
 
         Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
@@ -75,16 +67,16 @@ public class CollectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CollectionActivity.this,FiltreActivity.class);
-                intent.putExtra("filtreFaction", filtreFaction);
-                intent.putExtra("filtreTag", filtreTag);
-                intent.putExtra("filtreRarete", filtreRarete);
-                intent.putExtra("filtreType", filtreType);
                 startActivity(intent);
             }
         });
+        filtrerListeCartesAAfficher();
+        rafraichirListe();
+    }
 
-
-
+    @Override
+    protected void onResume(){
+        super.onResume();
         filtrerListeCartesAAfficher();
         rafraichirListe();
     }
@@ -105,19 +97,19 @@ public class CollectionActivity extends AppCompatActivity {
     }
 
     protected void checkListesFiltre(){
-        if(filtreRarete==null){
-            filtreRarete = new ArrayList<>();
-            filtreRarete.add(true);
-            filtreRarete.add(true);
-            filtreRarete.add(true);
-            filtreRarete.add(true);
+        if(fc.filtreRarete==null){
+            fc.filtreRarete = new ArrayList<>();
+            fc.filtreRarete.add(true);
+            fc.filtreRarete.add(true);
+            fc.filtreRarete.add(true);
+            fc.filtreRarete.add(true);
         }
-        if(filtreType==null){
-            filtreType = new ArrayList<>();
-            filtreType.add(true);
-            filtreType.add(true);
-            filtreType.add(true);
-            filtreType.add(true);
+        if(fc.filtreType==null){
+            fc.filtreType = new ArrayList<>();
+            fc.filtreType.add(true);
+            fc.filtreType.add(true);
+            fc.filtreType.add(true);
+            fc.filtreType.add(true);
         }
     }
 
@@ -127,11 +119,11 @@ public class CollectionActivity extends AppCompatActivity {
 
         /**********************   FILTRE PAR TAG     ************************/
 
-        if(filtreTag>0) { // Si un tag à été sélectionné
+        if(fc.filtreTag>0) { // Si un tag à été sélectionné
             ArrayList<TagCarte> tagCartes = fc.getTagCarte();
             ArrayList<Tags> tags = fc.getTags();
             ArrayList<Integer> idsCarte = new ArrayList<>();
-            Tags t = tags.get(filtreTag-1); // Trouve le tag
+            Tags t = tags.get(fc.filtreTag-1); // Trouve le tag
             for(TagCarte tc : tagCartes){
                 if(tc.idTag==t.id){ //Si les id correspondent, on veut cette carte
                     idsCarte.add(tc.idCarte);
@@ -148,10 +140,10 @@ public class CollectionActivity extends AppCompatActivity {
         }
         ArrayList<Carte> temp = new ArrayList<>();
         /**********************   FILTRE PAR FACTION     ************************/
-        if(filtreFaction>0){ // Si une faction à été sélectionnée
+        if(fc.filtreFaction>0){ // Si une faction à été sélectionnée
             temp = new ArrayList<>();
             for(Carte c : cartesAAfficher){ // On itère sur les cartes restantes
-                if(filtreFaction-1 != c.faction){ // On ne veut pas celles qui ne font pas partie de la faction
+                if(fc.filtreFaction-1 != c.faction){ // On ne veut pas celles qui ne font pas partie de la faction
                     temp.add(c); // on met les cartes dans une autre liste pour les enlever plus facilement (on ne peut pas directement dans la boucle foreach)
                 }
             }
@@ -162,13 +154,13 @@ public class CollectionActivity extends AppCompatActivity {
 
         temp.clear();
         int count = 0;
-        for(boolean b : filtreType){
+        for(boolean b : fc.filtreType){
             if(!b)
                 count++; // Compte le nombre de faux
         }
         if(count<4) { // S'il y a 4 faux, ne filtre pas le type
             for (int i = 0; i < 4; i++) {
-                if (!filtreType.get(i)) {
+                if (!fc.filtreType.get(i)) {
                     count++;
                     for (Carte c : cartesAAfficher) {
                         if (c.type == i) {
@@ -183,33 +175,33 @@ public class CollectionActivity extends AppCompatActivity {
 
         temp.clear();
         count = 0;
-        for(boolean b : filtreRarete){
+        for(boolean b : fc.filtreRarete){
             if(!b)
                 count++; // Compte le nombre de faux
         }
         if(count<4) { // S'il y a 4 faux, ne filtre pas la rareté{
-            if (!filtreRarete.get(0)) { // Carte créées et communes
+            if (!fc.filtreRarete.get(0)) { // Carte créées et communes
                 for (Carte c : cartesAAfficher) {
                     if (c.coutCreation <= 30) {
                         temp.add(c);
                     }
                 }
             }
-            if (!filtreRarete.get(1)) { // Cartes rares
+            if (!fc.filtreRarete.get(1)) { // Cartes rares
                 for (Carte c : cartesAAfficher) {
                     if (c.coutCreation == 80) {
                         temp.add(c);
                     }
                 }
             }
-            if (!filtreRarete.get(2)) { // Cartes épiques
+            if (!fc.filtreRarete.get(2)) { // Cartes épiques
                 for (Carte c : cartesAAfficher) {
                     if (c.coutCreation == 200) {
                         temp.add(c);
                     }
                 }
             }
-            if (!filtreRarete.get(3)) { // Cartes légendaires
+            if (!fc.filtreRarete.get(3)) { // Cartes légendaires
                 for (Carte c : cartesAAfficher) {
                     if (c.coutCreation == 800) {
                         temp.add(c);
