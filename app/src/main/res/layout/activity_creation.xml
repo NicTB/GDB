@@ -55,15 +55,6 @@
         android:layout_toLeftOf="@+id/btnDecksPartages"
         android:layout_toStartOf="@+id/btnDecksPartages" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_below="@+id/btnDecksPartages"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_height="300dp"
-        android:scrollbars="horizontal" />
-
     <Button
         android:text="Supprimer"
         android:layout_width="wrap_content"
@@ -83,5 +74,14 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btnDecksPartages"
         android:layout_toStartOf="@+id/btnDecksPartages" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSupprimerDeck"
+        android:id="@+id/listeDecks"
+        android:layout_below="@+id/btnDecksPartages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
