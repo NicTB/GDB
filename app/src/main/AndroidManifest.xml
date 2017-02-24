@@ -20,7 +20,8 @@
         <activity android:name=".CollectionActivity" />
         <activity android:name=".CreationActivity" />
         <activity android:name=".AfficherCarteActivity" />
-        <activity android:name=".FiltreActivity"></activity>
+        <activity android:name=".FiltreActivity" />
+        <activity android:name=".ChoisirFactionActivity"></activity>
     </application>
 
 </manifest>

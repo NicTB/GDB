@@ -9,6 +9,7 @@ public class GestionDeck {
     private GestionDeck(){}
 
     private static GestionDeck gd;
+    private Deck deckSelectionne;
 
     public static GestionDeck getInstance(){
         if(gd==null){
@@ -17,7 +18,6 @@ public class GestionDeck {
         return gd;
     }
 
-    private Deck deckSelectionne;
 
     public void setDeckSelectionne(Deck d){
         deckSelectionne = d;

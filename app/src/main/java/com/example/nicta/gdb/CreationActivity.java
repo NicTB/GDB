@@ -1,5 +1,6 @@
 package com.example.nicta.gdb;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ public class CreationActivity extends AppCompatActivity {
     RecyclerView listeDecks;
     ArrayList<Deck> decks;
     static TextView txtNomDeckSelectionne;
+    Button btnCreerDeck;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,8 @@ public class CreationActivity extends AppCompatActivity {
         fc = FournisseurCartes.getInstance();
         listeDecks = (RecyclerView) findViewById(R.id.listeDecks);
         txtNomDeckSelectionne = (TextView) findViewById(R.id.txtNomDeckSelectionne);
+        btnCreerDeck = (Button) findViewById(R.id.btnCreerDeck);
+
 
         GdbBDD gdbBDD = new GdbBDD(this);
 
@@ -68,6 +74,15 @@ public class CreationActivity extends AppCompatActivity {
 
         }
         listeDecks.setLayoutManager(MyLayoutManager);
+
+
+        btnCreerDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreationActivity.this,ChoisirFactionActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
