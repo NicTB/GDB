@@ -55,26 +55,6 @@
         android:layout_toLeftOf="@+id/btnDecksPartages"
         android:layout_toStartOf="@+id/btnDecksPartages" />
 
-    <Button
-        android:text="Supprimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSupprimerDeck"
-        android:layout_alignBaseline="@+id/btnModifierDeck"
-        android:layout_alignBottom="@+id/btnModifierDeck"
-        android:layout_toRightOf="@+id/btnDecksPartages"
-        android:layout_toEndOf="@+id/btnDecksPartages" />
-
-    <Button
-        android:text="Modifier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnModifierDeck"
-        android:layout_marginBottom="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnDecksPartages"
-        android:layout_toStartOf="@+id/btnDecksPartages" />
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,5 +63,46 @@
         android:layout_below="@+id/btnDecksPartages"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Supprimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSupprimerDeck"
+        android:layout_alignBaseline="@+id/btnModifierDeck"
+        android:layout_alignBottom="@+id/btnModifierDeck"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Modifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnModifierDeck"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btnSupprimerDeck"
+        android:layout_toStartOf="@+id/btnSupprimerDeck" />
+
+    <TextView
+        android:text="Deck sélectionné :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/listeDecks"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Aucun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnModifierDeck"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/txtNomDeckSelectionne"
+        android:layout_toLeftOf="@+id/btnModifierDeck"
+        android:layout_toStartOf="@+id/btnModifierDeck"
+        android:layout_below="@+id/textView4" />
 
 </RelativeLayout>

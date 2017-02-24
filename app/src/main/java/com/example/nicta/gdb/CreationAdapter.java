@@ -27,9 +27,8 @@ public class CreationAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         // create a new view
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.deck_cardview, parent, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_cardview, parent, false);
+        MyViewHolder holder = new MyViewHolder(view, context);
         return holder;
     }
     @Override
@@ -37,6 +36,7 @@ public class CreationAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.nomDeck.setText(list.get(position).getNom());
         int id = context.getResources().getIdentifier(list.get(position).getLeader().image, "drawable", context.getPackageName());
         holder.imageDeck.setImageResource(id);
+        holder.deck = list.get(position);
     }
     @Override
     public int getItemCount() {
