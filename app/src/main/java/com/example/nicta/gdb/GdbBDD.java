@@ -85,7 +85,7 @@ public class GdbBDD {
         return bdd.delete(TABLE_DECK, COL_ID + " = " +id, null);
     }
 
-    ArrayList<Deck> getDecks() {
+    public ArrayList<Deck> getDecks() {
         String[] colonnes = new String[]{COL_ID, COL_PROPRIETAIRE, COL_NOM, COL_DESCRIPTION, COL_FACTION, COL_LEADER};
 
         Cursor curseur = bdd.query(TABLE_DECK, colonnes, null, null, null, null, null);
@@ -105,9 +105,9 @@ public class GdbBDD {
             d.setDescription(c.getString(NUM_COL_DESCRIPTION));
             d.setFaction(c.getInt(NUM_COL_FACTION));
             d.setLeaderParId(c.getInt(NUM_COL_LEADER));
-            ArrayList<CarteDeck> cd = new ArrayList<>();
-            cd = getCarteDeckWithIdDeck(d.getId());
 
+            ArrayList<CarteDeck> cd = getCarteDeckWithIdDeck(d.getId());
+            d.setCartesDeck(cd);
             decks.add(d);
         }
         c.close();

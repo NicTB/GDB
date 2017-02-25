@@ -34,11 +34,4 @@ public class Carte{
     @Expose @SerializedName("coutCreation")
     public int coutCreation;
 
-
-    public boolean isEqual(int carteId){
-        return carteId == id;
-    }
-
-
-
 }

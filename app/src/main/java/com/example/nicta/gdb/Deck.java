@@ -56,18 +56,22 @@ public class Deck {
     }
 
     protected void setCartesDeck(ArrayList<CarteDeck> cds){
-        ArrayList<Integer> ids = new ArrayList<>();
-        for(CarteDeck cd : cds){
-            ids.add(cd.getIdCarte());
-        }
-
-        FournisseurCartes fc = FournisseurCartes.getInstance();
-        ArrayList<Carte> cartes = fc.getCartes();
-        for(Carte carte : cartes){
-            if(ids.contains(carte.id)){
-                cartesDeck.add(carte);
+        if(cds!=null){
+            ArrayList<Integer> ids = new ArrayList<>();
+            for(CarteDeck cd : cds){
+                ids.add(cd.getIdCarte());
             }
 
+            FournisseurCartes fc = FournisseurCartes.getInstance();
+            ArrayList<Carte> cartes = fc.getCartes();
+            for(Carte carte : cartes){
+                if(ids.contains(carte.id)){
+                    for(int i : ids){
+                        if(i == carte.id)
+                            cartesDeck.add(carte);
+                    }
+                }
+            }
         }
     }
 
