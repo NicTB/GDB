@@ -129,6 +129,10 @@ public class GdbBDD {
         return bdd.delete(TABLE_CARTEDECK, COL_ID + " = " +id, null);
     }
 
+    public int removeCarteDeckWithDeckID(int id){
+        return bdd.delete(TABLE_CARTEDECK, COL_IDDECK + " = " +id, null);
+    }
+
     public ArrayList<CarteDeck> getCarteDeckWithIdDeck(int id){
         String[] colonnesCarteDeck = {COL_ID, COL_IDCARTE, COL_IDDECK};
         String selection = COL_IDDECK + " = ?";
