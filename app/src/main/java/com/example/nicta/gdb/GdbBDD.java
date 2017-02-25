@@ -17,11 +17,17 @@ public class GdbBDD {
 
     private static final String TABLE_DECK = "table_deck";
     private static final String COL_ID = "ID";
+    private static final int NUM_COL_ID = 0;
     private static final String COL_PROPRIETAIRE = "Proprietaire";
+    private static final int NUM_COL_PROPRIETAIRE = 1;
     private static final String COL_NOM = "Nom";
+    private static final int NUM_COL_NOM = 2;
     private static final String COL_DESCRIPTION = "Description";
+    private static final int NUM_COL_DESCRIPTION = 3;
     private static final String COL_FACTION = "Faction";
+    private static final int NUM_COL_FACTION = 4;
     private static final String COL_LEADER = "Leader";
+    private static final int NUM_COL_LEADER = 5;
 
 
     private static final String TABLE_CARTEDECK = "table_carteDeck";
@@ -78,6 +84,37 @@ public class GdbBDD {
     public int removeDeckWithID(int id){
         return bdd.delete(TABLE_DECK, COL_ID + " = " +id, null);
     }
+
+    ArrayList<Deck> getDecks() {
+        String[] colonnes = new String[]{COL_ID, COL_PROPRIETAIRE, COL_NOM, COL_DESCRIPTION, COL_FACTION, COL_LEADER};
+
+        Cursor curseur = bdd.query(TABLE_DECK, colonnes, null, null, null, null, null);
+        return cursorToDeck(curseur);
+    }
+
+    private ArrayList<Deck> cursorToDeck(Cursor c){
+        if (c.getCount() == 0)
+            return null;
+
+        ArrayList<Deck> decks = new ArrayList<>();
+        while(c.moveToNext()) {
+            Deck d = new Deck();
+            d.setId(c.getInt(NUM_COL_ID));
+            d.setProprietaire(c.getString(NUM_COL_PROPRIETAIRE));
+            d.setNom(c.getString(NUM_COL_NOM));
+            d.setDescription(c.getString(NUM_COL_DESCRIPTION));
+            d.setFaction(c.getInt(NUM_COL_FACTION));
+            d.setLeaderParId(c.getInt(NUM_COL_LEADER));
+            ArrayList<CarteDeck> cd = new ArrayList<>();
+            cd = getCarteDeckWithIdDeck(d.getId());
+
+            decks.add(d);
+        }
+        c.close();
+
+        return decks;
+    }
+
 
     /***********************     CarteDeck       ****************************/
 

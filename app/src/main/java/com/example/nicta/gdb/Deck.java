@@ -21,12 +21,26 @@ public class Deck {
         cartesDeck = new ArrayList<>();
     }
 
+    protected void setId(int id){
+        Id = id;
+    }
+
     protected void setFaction(int f){
         faction = f;
     }
 
     protected void setLeader(Carte nouvLeader){
         leader = nouvLeader;
+    }
+
+    protected void setLeaderParId(int id){
+        FournisseurCartes fc = FournisseurCartes.getInstance();
+        ArrayList<Carte> leaders = fc.getLeaders();
+        for(Carte c : leaders){
+            if(c.id == id){
+                leader = c;
+            }
+        }
     }
 
     protected void setNom(String n){
@@ -39,6 +53,26 @@ public class Deck {
 
     protected void setProprietaire(String p){
         proprietaire = p;
+    }
+
+    protected void setCartesDeck(ArrayList<CarteDeck> cds){
+        ArrayList<Integer> ids = new ArrayList<>();
+        for(CarteDeck cd : cds){
+            ids.add(cd.getIdCarte());
+        }
+
+        FournisseurCartes fc = FournisseurCartes.getInstance();
+        ArrayList<Carte> cartes = fc.getCartes();
+        for(Carte carte : cartes){
+            if(ids.contains(carte.id)){
+                cartesDeck.add(carte);
+            }
+
+        }
+    }
+
+    protected int getId(){
+        return Id;
     }
 
     protected int getFaction(){

@@ -21,7 +21,9 @@
         <activity android:name=".CreationActivity" />
         <activity android:name=".AfficherCarteActivity" />
         <activity android:name=".FiltreActivity" />
-        <activity android:name=".ChoisirFactionActivity"></activity>
+        <activity android:name=".ChoisirFactionActivity" />
+        <activity android:name=".ChoisirLeaderActivity" />
+        <activity android:name=".DeckBuilderActivity"></activity>
     </application>
 
 </manifest>

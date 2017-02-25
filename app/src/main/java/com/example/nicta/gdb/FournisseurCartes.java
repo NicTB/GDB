@@ -27,6 +27,7 @@ public class FournisseurCartes {
     }
     private Context context;
     private ArrayList<Carte> cartes = new ArrayList<Carte>();
+    private ArrayList<Carte> leaders = new ArrayList<>();
     private ArrayList<Tags> tags = new ArrayList<Tags>();
     private ArrayList<TagCarte> tagCarte = new ArrayList<TagCarte>();
 
@@ -44,6 +45,9 @@ public class FournisseurCartes {
                 cartes.clear();
                 for (Carte c : liste) {
                     cartes.add(c);
+                    if(c.type == 3){
+                        leaders.add(c);
+                    }
                 }
             }
 
@@ -92,6 +96,9 @@ public class FournisseurCartes {
 
     public ArrayList<Carte> getCartes(){
         return cartes;
+    }
+    public ArrayList<Carte> getLeaders(){
+        return leaders;
     }
     public ArrayList<Tags> getTags(){
         return tags;

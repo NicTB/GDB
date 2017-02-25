@@ -1,6 +1,7 @@
 
 package com.example.nicta.gdb;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,8 +48,11 @@ public class ChoisirFactionActivity extends AppCompatActivity {
                 nouvDeck.setProprietaire("Moi");
 
                 gd.setDeckSelectionne(nouvDeck);
-                Deck d = gd.getDeckSelectionne();
-                d.getFaction();
+
+                Intent intent = new Intent(ChoisirFactionActivity.this, ChoisirLeaderActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
     }

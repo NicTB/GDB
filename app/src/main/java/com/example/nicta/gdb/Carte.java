@@ -3,11 +3,13 @@ package com.example.nicta.gdb;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Comparator;
+
 /**
  * Created by Nicolas on 16/02/2017.
  */
 
-public class Carte {
+public class Carte{
 
     @Expose @SerializedName("id")
     public int id;
@@ -31,6 +33,12 @@ public class Carte {
     public boolean jouable;
     @Expose @SerializedName("coutCreation")
     public int coutCreation;
+
+
+    public boolean isEqual(int carteId){
+        return carteId == id;
+    }
+
 
 
 }
