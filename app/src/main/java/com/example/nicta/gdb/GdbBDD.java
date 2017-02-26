@@ -93,25 +93,23 @@ public class GdbBDD {
     }
 
     private ArrayList<Deck> cursorToDeck(Cursor c){
-        if (c.getCount() == 0)
-            return null;
-
         ArrayList<Deck> decks = new ArrayList<>();
-        while(c.moveToNext()) {
-            Deck d = new Deck();
-            d.setId(c.getInt(NUM_COL_ID));
-            d.setProprietaire(c.getString(NUM_COL_PROPRIETAIRE));
-            d.setNom(c.getString(NUM_COL_NOM));
-            d.setDescription(c.getString(NUM_COL_DESCRIPTION));
-            d.setFaction(c.getInt(NUM_COL_FACTION));
-            d.setLeaderParId(c.getInt(NUM_COL_LEADER));
+        if (c.getCount() > 0) {
+            while (c.moveToNext()) {
+                Deck d = new Deck();
+                d.setId(c.getInt(NUM_COL_ID));
+                d.setProprietaire(c.getString(NUM_COL_PROPRIETAIRE));
+                d.setNom(c.getString(NUM_COL_NOM));
+                d.setDescription(c.getString(NUM_COL_DESCRIPTION));
+                d.setFaction(c.getInt(NUM_COL_FACTION));
+                d.setLeaderParId(c.getInt(NUM_COL_LEADER));
 
-            ArrayList<CarteDeck> cd = getCarteDeckWithIdDeck(d.getId());
-            d.setCartesDeck(cd);
-            decks.add(d);
+                ArrayList<CarteDeck> cd = getCarteDeckWithIdDeck(d.getId());
+                d.setCartesDeck(cd);
+                decks.add(d);
+            }
+            c.close();
         }
-        c.close();
-
         return decks;
     }
 

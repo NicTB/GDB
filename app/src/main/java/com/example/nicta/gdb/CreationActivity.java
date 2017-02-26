@@ -105,6 +105,7 @@ public class CreationActivity extends AppCompatActivity {
 
     private void afficherListeDecks(){
         // Mets à jour la liste des decks
+        decks = new ArrayList<>();
         gdbBDD.open();
         decks = gdbBDD.getDecks();
         gdbBDD.close();
