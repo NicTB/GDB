@@ -26,6 +26,7 @@ public class CreationActivity extends AppCompatActivity {
     static TextView txtNomDeckSelectionne;
     Button btnCreerDeck;
     Button btnSupprimerDeck;
+    Button btnModifierDeck;
     GdbBDD gdbBDD;
     GestionDeck gd;
 
@@ -38,6 +39,7 @@ public class CreationActivity extends AppCompatActivity {
         txtNomDeckSelectionne = (TextView) findViewById(R.id.txtNomDeckSelectionne);
         btnCreerDeck = (Button) findViewById(R.id.btnCreerDeck);
         btnSupprimerDeck = (Button) findViewById(R.id.btnSupprimerDeck);
+        btnModifierDeck = (Button) findViewById(R.id.btnModifierDeck);
         gd = GestionDeck.getInstance();
 
         gdbBDD = new GdbBDD(this);
@@ -82,6 +84,14 @@ public class CreationActivity extends AppCompatActivity {
             }
         });
 
+        btnModifierDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreationActivity.this,DeckBuilderActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -114,7 +124,7 @@ public class CreationActivity extends AppCompatActivity {
         listeDecks.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this);
         MyLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        if (decks.size() > 0 & listeDecks != null) {
+        if (decks != null & listeDecks != null) {
             listeDecks.setAdapter(new CreationAdapter(decks, getBaseContext()));
         }
         listeDecks.setLayoutManager(MyLayoutManager);

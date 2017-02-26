@@ -15,6 +15,9 @@ public class Deck {
     private int faction;
     private Carte leader;
 
+    private int countSilver;
+    private int countGold;
+
     private ArrayList<Carte> cartesDeck;
 
     public Deck(){
@@ -99,38 +102,42 @@ public class Deck {
         return proprietaire;
     }
 
-    protected boolean AjouterCarte(Carte carte){
-        if(carte.type== Enums.Type.Bronze.getValue()){ // Si c'est une carte bronze, on peut en avoir jusqu'à 3 copies dans un deck
-            if(!cartesDeck.contains(carte)){
-                cartesDeck.add(carte);
-                return true;
-            }
-            else{
-                int compte = 0;
-                for(Carte c : cartesDeck){
-                    if(c.id == carte.id){
-                        compte++;
+    protected void AjouterCarte(Carte carte){
+        CompteCartesType();
+        if(cartesDeck.size()<40) {
+            switch (carte.type) {
+                case 0: // Type == Bronze
+                    if (!cartesDeck.contains(carte)) {
+                        cartesDeck.add(carte);
                     }
-                }
-                if(compte<3){
-                    cartesDeck.add(carte);
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                    else {
+                        int compte = 0;
+                        for (Carte c : cartesDeck) {
+                            if (c.id == carte.id) {
+                                compte++;
+                            }
+                        }
+                        if (compte < 3) {
+                            cartesDeck.add(carte);
+                        }
+                    }
+                    break;
+                case 1: // Type == Silver
+                    if(countSilver<6) {
+                        if (!cartesDeck.contains(carte)) {
+                            cartesDeck.add(carte);
+                        }
+                    }
+                    break;
+                case 2: // Type == Gold
+                    if(countGold < 4) {
+                        if (!cartesDeck.contains(carte)) {
+                            cartesDeck.add(carte);
+                        }
+                    }
+                    break;
             }
         }
-        else if(carte.type == Enums.Type.Silver.getValue() || carte.type == Enums.Type.Gold.getValue()){ // Si c'est une carte Silver ou Gold, on ne peut en avoir qu'une seule
-            if(!cartesDeck.contains(carte)){
-                cartesDeck.add(carte);
-                return true;
-            }
-            else
-                return false;
-        }
-        else // Si la carte est un leader (ceci ne devrait jamais arriver)
-            return false;
     }
 
     protected void RetirerCarte(Carte c){
@@ -146,6 +153,21 @@ public class Deck {
             return true;
         else
             return false;
+    }
+
+    private void CompteCartesType(){
+        countSilver = 0;
+        countGold = 0;
+        for(Carte c : cartesDeck){
+            switch (c.type) {
+                case 1: // Type == Silver
+                    countSilver++;
+                    break;
+                case 2: // Type == Gold
+                    countGold++;
+                    break;
+            }
+        }
     }
 
 }

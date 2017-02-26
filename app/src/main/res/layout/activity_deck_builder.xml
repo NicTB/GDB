@@ -22,12 +22,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="375dp">
+            android:layout_height="275dp">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="52dp">
+                android:layout_height="35dp">
 
                 <Button
                     android:text="Options"
@@ -46,22 +46,21 @@
                 <TextView
                     android:text="Nombre&#10;de cartes :"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/textView10"
-                    android:textSize="14sp"
-                    android:layout_weight="0.31" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:text="0"
                     android:layout_width="36dp"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textView11" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="240dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -74,14 +73,14 @@
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/melee_icon"
                         android:id="@+id/imageView"
-                        android:layout_weight="0.23" />
+                        android:layout_weight="0.19" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ranged_icon"
                         android:id="@+id/imageView2"
-                        android:layout_weight="0.27" />
+                        android:layout_weight="0.29" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -101,26 +100,26 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="240dp">
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:id="@+id/listeCartesMelee"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:id="@+id/listeCartesRange"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:id="@+id/listeCartesSiege"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:id="@+id/listeCartesEvent" />
                 </LinearLayout>
             </LinearLayout>
@@ -134,7 +133,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="52dp">
+                android:layout_height="35dp">
 
                 <Button
                     android:text="Filtrer"
