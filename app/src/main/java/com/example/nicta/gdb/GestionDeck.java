@@ -1,5 +1,7 @@
 package com.example.nicta.gdb;
 
+import java.util.ArrayList;
+
 /**
  * Created by nicta on 2017-02-24.
  */
@@ -27,4 +29,6 @@ public class GestionDeck {
         return deckSelectionne;
     }
 
+    public int filtreTag;
+    public ArrayList<Boolean> filtreType;
 }

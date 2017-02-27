@@ -23,7 +23,9 @@
         <activity android:name=".FiltreActivity" />
         <activity android:name=".ChoisirFactionActivity" />
         <activity android:name=".ChoisirLeaderActivity" />
-        <activity android:name=".DeckBuilderActivity"></activity>
+        <activity android:name=".DeckBuilderActivity" />
+        <activity android:name=".DeckFiltreActivity" />
+        <activity android:name=".ParamDeckActivity"></activity>
     </application>
 
 </manifest>

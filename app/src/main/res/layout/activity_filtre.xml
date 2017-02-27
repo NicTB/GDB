@@ -49,9 +49,7 @@
         android:layout_below="@+id/textView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:layout_alignRight="@+id/checkNeutre"
-        android:layout_alignEnd="@+id/checkNeutre" />
+        android:layout_marginTop="14dp" />
 
     <CheckBox
         android:text="Gold"
@@ -101,17 +99,6 @@
         android:layout_alignLeft="@+id/checkLegendary"
         android:layout_alignStart="@+id/checkLegendary" />
 
-    <TextView
-        android:text="Rareté des cartes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:textSize="18sp"
-        android:layout_marginTop="14dp"
-        android:layout_below="@+id/checkGold"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <CheckBox
         android:text="Epic"
         android:layout_width="wrap_content"
@@ -152,4 +139,15 @@
         android:layout_below="@+id/textView6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Rareté des cartes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="18sp"
+        android:layout_below="@+id/checkGold"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>

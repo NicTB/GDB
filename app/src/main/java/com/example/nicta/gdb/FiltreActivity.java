@@ -1,6 +1,5 @@
 package com.example.nicta.gdb;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,11 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FiltreActivity extends AppCompatActivity {
 

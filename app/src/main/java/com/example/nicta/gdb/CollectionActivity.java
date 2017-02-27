@@ -22,6 +22,7 @@ public class CollectionActivity extends AppCompatActivity {
     private ArrayList<Carte> cartesAAfficher;
     CollectionAdapter adapter;
     private ListView listeCartes;
+    SearchView chercherCarte;
     FournisseurCartes fc;
 
     @Override
@@ -33,7 +34,7 @@ public class CollectionActivity extends AppCompatActivity {
 
         Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
         listeCartes = (ListView) findViewById(R.id.listeCarte);
-        SearchView chercherCarte = (SearchView) findViewById(R.id.chercherCarte);
+        chercherCarte = (SearchView) findViewById(R.id.chercherCarte);
 
         chercherCarte.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -49,6 +50,7 @@ public class CollectionActivity extends AppCompatActivity {
                 cartesAAfficher.clear();
                 cartesAAfficher.addAll(temp);
                 rafraichirListe();
+                chercherCarte.clearFocus();
                 return false;
             }
 
