@@ -71,14 +71,14 @@ public class GdbBDD {
         return bdd.insert(TABLE_DECK, null, values);
     }
 
-    public int updateDeck(int id, Deck deck){
+    public int updateDeck(Deck deck){
         ContentValues values = new ContentValues();
         values.put(COL_PROPRIETAIRE, deck.getProprietaire());
         values.put(COL_NOM, deck.getNom());
         values.put(COL_DESCRIPTION, deck.getDescription());
         values.put(COL_FACTION, deck.getFaction());
         values.put(COL_LEADER, deck.getLeader().id);
-        return bdd.update(TABLE_DECK, values, COL_ID + " = " +id, null);
+        return bdd.update(TABLE_DECK, values, COL_ID + " = " +deck.getId(), null);
     }
 
     public int removeDeckWithID(int id){

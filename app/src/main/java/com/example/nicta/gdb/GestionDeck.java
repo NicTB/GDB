@@ -1,5 +1,7 @@
 package com.example.nicta.gdb;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ public class GestionDeck {
 
     private static GestionDeck gd;
     private Deck deckSelectionne;
+    protected Context context;
 
     public static GestionDeck getInstance(){
         if(gd==null){
@@ -27,6 +30,17 @@ public class GestionDeck {
 
     public Deck getDeckSelectionne(){
         return deckSelectionne;
+    }
+
+    public void sauvegarderDeck(){
+        GdbBDD gdbBDD = new GdbBDD(context);
+        gdbBDD.open();
+        gdbBDD.removeCarteDeckWithDeckID(deckSelectionne.getId());
+        for(Carte c : deckSelectionne.getCartesDeck()){
+            gdbBDD.insertCarteDeck(new CarteDeck(c.id, deckSelectionne.getId()));
+        }
+        gdbBDD.updateDeck(deckSelectionne);
+        gdbBDD.close();
     }
 
     public int filtreTag;

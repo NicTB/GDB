@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_param_deck"
     android:layout_width="match_parent"
@@ -8,6 +8,113 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.nicta.gdb.ParamDeckActivity">
+    tools:context="com.example.nicta.gdb.ParamDeckActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Partager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnPartager"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Sauvegarder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSauvegarderDeck"
+            android:layout_alignBaseline="@+id/btnPartager"
+            android:layout_alignBottom="@+id/btnPartager"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="433dp"
+        android:weightSum="1"
+        android:layout_weight="0.33">
+
+        <TextView
+            android:text="Créateur :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView17"
+            android:textSize="20sp"
+            android:layout_weight="0.03" />
+
+        <TextView
+            android:text="Moi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewCreateur"
+            android:layout_weight="0.04"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:paddingLeft="15dp" />
+
+        <TextView
+            android:text="Leader du deck :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView19"
+            android:layout_weight="0.03"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerLeader"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:text="Nom du deck :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView20"
+            android:layout_weight="0.03"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Nom"
+            android:ems="10"
+            android:id="@+id/editTextNomDeck"
+            android:layout_weight="0.03" />
+
+        <TextView
+            android:text="Description :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView22"
+            android:layout_weight="0.03"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Description"
+            android:ems="10"
+            android:id="@+id/editTextDescriptionDeck"
+            android:layout_weight="0.03" />
+
+    </LinearLayout>
+
+</LinearLayout>

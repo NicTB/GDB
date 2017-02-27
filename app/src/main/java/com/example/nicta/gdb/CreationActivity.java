@@ -41,8 +41,9 @@ public class CreationActivity extends AppCompatActivity {
         btnSupprimerDeck = (Button) findViewById(R.id.btnSupprimerDeck);
         btnModifierDeck = (Button) findViewById(R.id.btnModifierDeck);
         gd = GestionDeck.getInstance();
+        gd.context = this;
 
-        gdbBDD = new GdbBDD(this);
+        gdbBDD = new GdbBDD(gd.context);
 
         afficherListeDecks();
 
