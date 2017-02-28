@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ParamDeckActivity extends AppCompatActivity {
 
     Button btnSauvegarderDeck;
+    Button btnPartager;
     EditText editTextNomDeck;
     EditText editTextDescriptionDeck;
     Spinner spinnerLeader;
@@ -31,6 +32,7 @@ public class ParamDeckActivity extends AppCompatActivity {
         ArrayList<Carte> leaders = fc.getLeaders();
 
         btnSauvegarderDeck = (Button) findViewById(R.id.btnSauvegarderDeck);
+        btnPartager = (Button) findViewById(R.id.btnPartager);
         editTextNomDeck = (EditText) findViewById(R.id.editTextNomDeck);
         editTextDescriptionDeck = (EditText) findViewById(R.id.editTextDescriptionDeck);
         spinnerLeader = (Spinner) findViewById(R.id.spinnerLeader);

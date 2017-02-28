@@ -60,7 +60,7 @@ public class CreationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Deck deck = gd.getDeckSelectionne();
                 if(deck==null){
-                    Toast.makeText(getBaseContext(), "Veullez choisir un deck", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Veuillez choisir un deck", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -70,7 +70,6 @@ public class CreationActivity extends AppCompatActivity {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     supprimerDeckSelectionne();
                                     break;
-
                                 case DialogInterface.BUTTON_NEGATIVE:
                                     break;
                             }
