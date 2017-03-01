@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,14 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FournisseurCartes fc = FournisseurCartes.getInstance();
         fc.chercherCartes();
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        String name =  gso.getAccount().name;
-
-
 
         Button btnCollection;
         Button btnCreation;
@@ -46,5 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+        startActivity(intent);
+
     }
 }
