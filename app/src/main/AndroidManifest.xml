@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nicta.gdb"
-    android:installLocation="auto"
-    android:sharedUserId="Nic.T.B"
-    android:versionCode="1"
-    android:versionName="string">
+    package="com.example.nicta.gdb">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -30,7 +26,6 @@
         <activity android:name=".DeckBuilderActivity" />
         <activity android:name=".DeckFiltreActivity" />
         <activity android:name=".ParamDeckActivity" />
-        <activity android:name=".SignInActivity"></activity>
     </application>
 
 </manifest>
