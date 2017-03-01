@@ -7,10 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-/**
- * Created by nicta on 2017-02-23.
- */
-
 public class GdbBDD {
     private static final int VERSION_BDD = 1;
     private static final String NOM_BDD = "gdb.db";
@@ -85,6 +81,7 @@ public class GdbBDD {
         return bdd.delete(TABLE_DECK, COL_ID + " = " +id, null);
     }
 
+    // Prend tous les decks de la bdd, puis les convertis en objet deck
     public ArrayList<Deck> getDecks() {
         String[] colonnes = new String[]{COL_ID, COL_PROPRIETAIRE, COL_NOM, COL_DESCRIPTION, COL_FACTION, COL_LEADER};
 
@@ -104,7 +101,9 @@ public class GdbBDD {
                 d.setFaction(c.getInt(NUM_COL_FACTION));
                 d.setLeaderParId(c.getInt(NUM_COL_LEADER));
 
+                // Cherche les cartes associées à ce deck
                 ArrayList<CarteDeck> cd = getCarteDeckWithIdDeck(d.getId());
+                // Transforme la liste de CarteDeck en liste de Cartes
                 d.setCartesDeck(cd);
                 decks.add(d);
             }
@@ -123,10 +122,7 @@ public class GdbBDD {
         return bdd.insert(TABLE_CARTEDECK, null, values);
     }
 
-    public int removeCarteDeckWithID(int id){
-        return bdd.delete(TABLE_CARTEDECK, COL_ID + " = " +id, null);
-    }
-
+    // Supprime toutes les cartes associées au deck
     public int removeCarteDeckWithDeckID(int id){
         return bdd.delete(TABLE_CARTEDECK, COL_IDDECK + " = " +id, null);
     }

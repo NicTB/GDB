@@ -9,10 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by nicta on 2017-02-23.
- */
-
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public TextView nomDeck;

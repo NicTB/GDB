@@ -5,10 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
-/**
- * Created by nicta on 2017-02-23.
- */
-
 public class GdbSqLite extends SQLiteOpenHelper {
 
     private static final String TABLE_DECK = "table_deck";

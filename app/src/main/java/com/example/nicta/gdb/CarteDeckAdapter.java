@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-/**
- * Created by nicta on 2017-02-26.
- */
 
 public class CarteDeckAdapter extends RecyclerView.Adapter<MyViewHolderCarteDeck> {
     private ArrayList<Carte> list;

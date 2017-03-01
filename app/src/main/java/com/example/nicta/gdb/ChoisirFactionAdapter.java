@@ -12,10 +12,6 @@ import com.example.nicta.gdb.Enums.Faction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nicta on 2017-02-24.
- */
-
 public class ChoisirFactionAdapter extends ArrayAdapter<Faction> {;
     ArrayList<String> capaciteFaction;
     ArrayList<String> StringImgBackFaction;

@@ -3,10 +3,6 @@ package com.example.nicta.gdb;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by nicta on 2017-02-19.
- */
-
 public class Enums {
 
     public enum Type

@@ -43,6 +43,14 @@
         android:layout_width="180dp" />
 
     <TextView
+        android:text="tags"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtViewTagsCarte"
+        android:textSize="18sp"
+        android:paddingLeft="5sp" />
+
+    <TextView
         android:text="faction"
         android:layout_height="wrap_content"
         android:id="@+id/txtViewFaction"

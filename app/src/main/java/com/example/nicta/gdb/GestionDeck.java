@@ -4,10 +4,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-/**
- * Created by nicta on 2017-02-24.
- */
-
 public class GestionDeck {
 
     private GestionDeck(){}

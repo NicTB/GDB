@@ -13,10 +13,6 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nicta on 2017-02-17.
- */
-
 public class CollectionAdapter extends ArrayAdapter<Carte> {
 
 

@@ -2,10 +2,6 @@ package com.example.nicta.gdb;
 
 import java.util.ArrayList;
 
-/**
- * Created by nicta on 2017-02-22.
- */
-
 public class Deck {
 
     private int Id;
@@ -58,21 +54,31 @@ public class Deck {
         proprietaire = p;
     }
 
+    // Transforme les objets CarteDeck en Carte, puis les ajoute au deck
+    // Utilisé dans la classe GdbBDD, dnas la méthode getDecks()
     protected void setCartesDeck(ArrayList<CarteDeck> cds){
         if(cds!=null){
-            ArrayList<Integer> ids = new ArrayList<>();
+            ArrayList<Integer> ids = new ArrayList<>(); // Liste des id des cartes
             for(CarteDeck cd : cds){
                 ids.add(cd.getIdCarte());
             }
 
             FournisseurCartes fc = FournisseurCartes.getInstance();
-            ArrayList<Carte> cartes = fc.getCartes();
+            ArrayList<Carte> cartes = fc.getCartes(); // Liste de toutes les cartes
+            // Pour chacune des cartes
             for(Carte carte : cartes){
+                // Si la liste d'id contient l'id de cette carte
                 if(ids.contains(carte.id)){
-                    for(int i : ids){
-                        if(i == carte.id)
-                            cartesDeck.add(carte);
+                    if(carte.type == Enums.Type.Bronze.getValue()) { // Si la carte est une carte bronze (on peut en avoir jusq'à 3 dans un deck)
+                        for (int i : ids) { // Ajoute cette carte chaque fois qu'elle apparait dans la liste d'id
+                            if (i == carte.id)
+                                cartesDeck.add(carte);
+                        }
                     }
+                    else{ // Si ce n'est pas une carte bronze, elle ne peut être là qu'une seule fois, donc on l'ajoute directement
+                        cartesDeck.add(carte);
+                    }
+
                 }
             }
         }
@@ -102,36 +108,43 @@ public class Deck {
         return proprietaire;
     }
 
+
+    // Méthode pour ajouter une carte au deck
     protected void AjouterCarte(Carte carte){
+        // Un deck peut avoir jusqu'à 6 cartes Silver et 4 cartes Gold
+        // Donc on compte ici le nombre de cartes de chaque dans le deck
         CompteCartesType();
+        // Un deck peut contenir au maximum 40 cartes
         if(cartesDeck.size()<40) {
             switch (carte.type) {
                 case 0: // Type == Bronze
-                    if (!cartesDeck.contains(carte)) {
+                    if (!cartesDeck.contains(carte)) { // Si le deck ne contient pas cette carte, on peut l'ajouter
                         cartesDeck.add(carte);
                     }
                     else {
-                        int compte = 0;
+                        // Un deck peut avoir jusqu'à 3 copies d'une carte Bronze
+                        int compte = 0; // Donc on compte le nombre de copies de cette carte
                         for (Carte c : cartesDeck) {
                             if (c.id == carte.id) {
                                 compte++;
                             }
                         }
+                        // S'il y en a moins de 3, on peut l'ajouter
                         if (compte < 3) {
                             cartesDeck.add(carte);
                         }
                     }
                     break;
                 case 1: // Type == Silver
-                    if(countSilver<6) {
-                        if (!cartesDeck.contains(carte)) {
+                    if(countSilver<6) { // S'il y a moins de 6 cartes Silver dans le deck
+                        if (!cartesDeck.contains(carte)) { // Et si le deck ne contient pas déjà cette carte, on peut l'ajouter
                             cartesDeck.add(carte);
                         }
                     }
                     break;
                 case 2: // Type == Gold
-                    if(countGold < 4) {
-                        if (!cartesDeck.contains(carte)) {
+                    if(countGold < 4) {// S'il y a moins de 4 cartes Gold dans le deck
+                        if (!cartesDeck.contains(carte)) {  // Et si le deck ne contient pas déjà cette carte, on peut l'ajouter
                             cartesDeck.add(carte);
                         }
                     }
@@ -140,6 +153,7 @@ public class Deck {
         }
     }
 
+    // Méthode pour retirer une carte du deck
     protected void RetirerCarte(Carte c){
         cartesDeck.remove(c);
     }
@@ -148,13 +162,14 @@ public class Deck {
         return cartesDeck;
     }
 
-    protected boolean checkValide(){
+    protected boolean checkValide(){ // Un deck est valide s'il a entre 25 et 40 cartes
         if(cartesDeck.size()>=25 && cartesDeck.size()<=40)
             return true;
         else
             return false;
     }
 
+    // Compte les cartes Silver et Gold du deck
     private void CompteCartesType(){
         countSilver = 0;
         countGold = 0;

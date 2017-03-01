@@ -11,10 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nicta on 2017-02-25.
- */
-
 public class ChoisirLeaderAdapter extends ArrayAdapter<Carte> {
 
     public ChoisirLeaderAdapter(Context context, int resource, List<Carte> items)

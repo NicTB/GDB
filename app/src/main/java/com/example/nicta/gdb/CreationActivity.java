@@ -121,6 +121,7 @@ public class CreationActivity extends AppCompatActivity {
         gdbBDD.close();
 
         // Affichage des decks dans la RecyclerView
+        // Trouvé sur ce site : https://www.codeproject.com/Articles/1152595/Android-Horizontal-ListView-Tutorial
         listeDecks.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this);
         MyLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

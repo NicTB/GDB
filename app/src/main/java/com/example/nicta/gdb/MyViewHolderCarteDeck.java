@@ -4,10 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-/**
- * Created by nicta on 2017-02-26.
- */
-
 public class MyViewHolderCarteDeck extends RecyclerView.ViewHolder {
 
     public ImageView imageCarte;

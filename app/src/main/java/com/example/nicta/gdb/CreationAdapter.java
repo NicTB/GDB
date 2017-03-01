@@ -12,11 +12,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by nicta on 2017-02-23.
- */
-
 public class CreationAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private ArrayList<Deck> list;
     Context context;

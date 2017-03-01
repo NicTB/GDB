@@ -12,10 +12,6 @@ import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.client.Response;
 
-/**
- * Created by nicta on 2017-02-20.
- */
-
 public class FournisseurCartes {
 
     private FournisseurCartes(){}
@@ -25,13 +21,12 @@ public class FournisseurCartes {
             FC = new FournisseurCartes();
         return FC;
     }
-    private Context context;
     private ArrayList<Carte> cartes = new ArrayList<Carte>();
     private ArrayList<Carte> leaders = new ArrayList<>();
     private ArrayList<Tags> tags = new ArrayList<Tags>();
     private ArrayList<TagCarte> tagCarte = new ArrayList<TagCarte>();
 
-    public void chercherCartes() {
+    protected void chercherCartes() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://d75e14.sv55.cmaisonneuve.qc.ca/")
                 .setClient(new OkClient())

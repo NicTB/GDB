@@ -6,10 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by nicta on 2017-02-26.
- */
-
 public class MyViewHolderCarte extends RecyclerView.ViewHolder {
 
     public ImageView imageCarte;

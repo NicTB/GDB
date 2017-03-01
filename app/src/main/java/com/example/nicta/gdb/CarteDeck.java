@@ -1,9 +1,5 @@
 package com.example.nicta.gdb;
 
-/**
- * Created by nicta on 2017-02-23.
- */
-
 public class CarteDeck {
     private int id;
     private int idCarte;

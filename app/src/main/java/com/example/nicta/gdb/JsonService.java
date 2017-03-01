@@ -5,10 +5,6 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.http.GET;
 
-/**
- * Created by nicta on 2017-02-17.
- */
-
 public interface JsonService {
 
     @GET("/mobile/GetCartes")
