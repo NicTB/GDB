@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 public class DeckBuilderAdapter extends RecyclerView.Adapter<MyViewHolderCarte> {
+
+    // Adapter pour l'activité DeckBuilder
+
     private ArrayList<Carte> list;
     Context context;
     public DeckBuilderActivity deckBuilderActivity;

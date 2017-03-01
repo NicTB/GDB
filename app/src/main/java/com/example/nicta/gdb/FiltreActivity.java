@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class FiltreActivity extends AppCompatActivity {
 
+    // Activité de filtre pour la Collection
+
     private Spinner spinFaction; //Sélection de faction
     private Spinner spinTags; //Sélection de tag
 

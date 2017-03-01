@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
+    // Affichage des decks dans l'activité Creation
+
     public TextView nomDeck;
     public ImageView imageDeck;
     public TextView txtNomDeckSelectionne;

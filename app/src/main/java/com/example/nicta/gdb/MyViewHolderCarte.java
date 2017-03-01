@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 public class MyViewHolderCarte extends RecyclerView.ViewHolder {
 
+    // Affichage des cartes en bas de l'activité DeckBuilder
+
     public ImageView imageCarte;
     public Carte carte;
     private GestionDeck gd;

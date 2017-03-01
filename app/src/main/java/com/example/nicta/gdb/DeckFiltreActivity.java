@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class DeckFiltreActivity extends AppCompatActivity {
 
+    // Activité pour le filtre dans l'activité DeckBuilder
+
     Button btnFiltrerCarte;
     Spinner spinnerTags;
     ArrayList<CheckBox> checksType;

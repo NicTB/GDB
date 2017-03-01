@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class ParamDeckActivity extends AppCompatActivity {
 
+    // Activité pour les paramètres du deck
+
     Button btnSauvegarderDeck;
     Button btnPartager;
     EditText editTextNomDeck;
@@ -37,6 +39,7 @@ public class ParamDeckActivity extends AppCompatActivity {
         editTextDescriptionDeck = (EditText) findViewById(R.id.editTextDescriptionDeck);
         spinnerLeader = (Spinner) findViewById(R.id.spinnerLeader);
 
+        // Changement de leader
         spinnerLeader.setSelection(gd.filtreTag);
         ArrayList<String> nomLeaders = new ArrayList<>();
         int position = 0;
@@ -61,6 +64,7 @@ public class ParamDeckActivity extends AppCompatActivity {
         editTextNomDeck.setText(gd.getDeckSelectionne().getNom());
         editTextDescriptionDeck.setText(gd.getDeckSelectionne().getDescription());
 
+        // Change le nom, la description et le leader du deck
         btnSauvegarderDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

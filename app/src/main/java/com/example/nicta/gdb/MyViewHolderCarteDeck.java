@@ -6,6 +6,8 @@ import android.widget.ImageView;
 
 public class MyViewHolderCarteDeck extends RecyclerView.ViewHolder {
 
+    // Affichage des cartes d'une rangée des cartes du deck dans l'activité DeckBuilder
+
     public ImageView imageCarte;
     public Carte carte;
     private GestionDeck gd;

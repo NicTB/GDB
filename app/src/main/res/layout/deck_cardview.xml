@@ -20,7 +20,7 @@
             android:layout_height="48dp"
             android:id="@+id/nomDeck"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="21sp" />
 
         <ImageView
             android:layout_width="match_parent"
