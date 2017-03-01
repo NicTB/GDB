@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 
 public class CarteDeckAdapter extends RecyclerView.Adapter<MyViewHolderCarteDeck> {
+
+    // Adapter pour les cartes du deck affichée dans la DeckBuilderActivity
+
     private ArrayList<Carte> list;
     Context context;
     public DeckBuilderActivity deckBuilderActivity;

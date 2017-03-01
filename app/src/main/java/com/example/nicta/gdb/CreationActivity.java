@@ -13,12 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.OkClient;
+import retrofit.client.Response;
 
 public class CreationActivity extends AppCompatActivity {
+
+    // Activité d'accueil pour la création de deck
 
     FournisseurCartes fc;
     RecyclerView listeDecks;
@@ -27,6 +37,7 @@ public class CreationActivity extends AppCompatActivity {
     Button btnCreerDeck;
     Button btnSupprimerDeck;
     Button btnModifierDeck;
+    ProgressBar progressBar2;
     GdbBDD gdbBDD;
     GestionDeck gd;
 
@@ -35,17 +46,55 @@ public class CreationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation);
         fc = FournisseurCartes.getInstance();
+        gd = GestionDeck.getInstance();
+
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         listeDecks = (RecyclerView) findViewById(R.id.listeDecks);
         txtNomDeckSelectionne = (TextView) findViewById(R.id.txtNomDeckSelectionne);
         btnCreerDeck = (Button) findViewById(R.id.btnCreerDeck);
         btnSupprimerDeck = (Button) findViewById(R.id.btnSupprimerDeck);
         btnModifierDeck = (Button) findViewById(R.id.btnModifierDeck);
-        gd = GestionDeck.getInstance();
-        gd.context = this;
 
+        gd.context = this;
         gdbBDD = new GdbBDD(gd.context);
 
-        afficherListeDecks();
+        if(fc.getCartes().size()==0){ // Si on n'a pas de cartes chargées, on va les chercher
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint("http://d75e14.sv55.cmaisonneuve.qc.ca/")
+                    .setClient(new OkClient())
+                    .build();
+
+            JsonService jsonService = restAdapter.create(JsonService.class);
+
+            Callback<List<Carte>> callbackCarte = new Callback<List<Carte>>() {
+                @Override
+                public void success(List<Carte> liste, Response response) {
+                    fc.cartes.clear();
+                    fc.leaders.clear();
+                    for (Carte c : liste) {
+                        fc.cartes.add(c);
+                        if(c.type == 3){
+                            fc.leaders.add(c);
+                        }
+                    }
+                    afficherListeDecks();
+                    // On enlève la barre de chargement
+                    progressBar2.setVisibility(View.GONE);
+                }
+                @Override
+                public void failure(RetrofitError error) {
+                    String errorString = error.toString();
+                }
+            };
+            jsonService.getCartes(callbackCarte);
+            // On indique à l'utilisateur qu'on charge les cartes
+            progressBar2.setVisibility(View.VISIBLE);
+        }
+        else{
+            afficherListeDecks();
+            progressBar2.setVisibility(View.GONE);
+        }
+
 
         btnCreerDeck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +146,8 @@ public class CreationActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        afficherListeDecks();
+        if(fc.getCartes().size()>0)
+            afficherListeDecks();
     }
 
 

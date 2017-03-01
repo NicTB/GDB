@@ -15,6 +15,7 @@ import java.util.List;
 
 public class CollectionAdapter extends ArrayAdapter<Carte> {
 
+    // Adapteur pour l'activité Collection
 
     public  CollectionAdapter(Context context, int resource, List<Carte> items)
     {

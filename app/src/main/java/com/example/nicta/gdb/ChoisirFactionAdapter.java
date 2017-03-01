@@ -16,6 +16,8 @@ public class ChoisirFactionAdapter extends ArrayAdapter<Faction> {;
     ArrayList<String> capaciteFaction;
     ArrayList<String> StringImgBackFaction;
 
+    // Adapter pour l'activité ChoisirFaction
+
     public  ChoisirFactionAdapter(Context context, int resource, List<Faction> items)
     {
         super(context, resource, items);
@@ -45,12 +47,12 @@ public class ChoisirFactionAdapter extends ArrayAdapter<Faction> {;
             txtChoixFactionCapacite.setText(capaciteFaction.get(position));
             int id = getContext().getResources().getIdentifier(StringImgBackFaction.get(position), "drawable", getContext().getPackageName());
             imgBackFaction.setImageResource(id);
-
         }
 
         return maView;
     }
 
+    // Initialisation des listes de capacité de factions et de leur image
     private void CapacitesDeFaction(){
         capaciteFaction = new ArrayList<>();
         StringImgBackFaction = new ArrayList<>();

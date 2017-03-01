@@ -21,8 +21,8 @@ public class FournisseurCartes {
             FC = new FournisseurCartes();
         return FC;
     }
-    private ArrayList<Carte> cartes = new ArrayList<Carte>();
-    private ArrayList<Carte> leaders = new ArrayList<>();
+    protected ArrayList<Carte> cartes = new ArrayList<Carte>();
+    protected ArrayList<Carte> leaders = new ArrayList<>();
     private ArrayList<Tags> tags = new ArrayList<Tags>();
     private ArrayList<TagCarte> tagCarte = new ArrayList<TagCarte>();
 
@@ -33,24 +33,6 @@ public class FournisseurCartes {
                 .build();
 
         JsonService jsonService = restAdapter.create(JsonService.class);
-
-        Callback<List<Carte>> callbackCarte = new Callback<List<Carte>>() {
-            @Override
-            public void success(List<Carte> liste, Response response) {
-                cartes.clear();
-                for (Carte c : liste) {
-                    cartes.add(c);
-                    if(c.type == 3){
-                        leaders.add(c);
-                    }
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                String errorString = error.toString();
-            }
-        };
 
         Callback<List<Tags>> callbackTag = new Callback<List<Tags>>() {
             @Override
@@ -84,7 +66,6 @@ public class FournisseurCartes {
             }
         };
 
-        jsonService.getCartes(callbackCarte);
         jsonService.getTags(callbackTag);
         jsonService.getTagCarte(callbackTagCarte);
     }

@@ -13,6 +13,8 @@ import java.util.List;
 
 public class ChoisirLeaderAdapter extends ArrayAdapter<Carte> {
 
+    // Adapter pour l'activité ChoisirLeader
+
     public ChoisirLeaderAdapter(Context context, int resource, List<Carte> items)
     {
         super(context, resource, items);

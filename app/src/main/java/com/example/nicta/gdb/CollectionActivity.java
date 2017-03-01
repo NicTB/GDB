@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -17,45 +18,99 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.OkClient;
+import retrofit.client.Response;
+
 public class CollectionActivity extends AppCompatActivity {
+
+
+    // Activité pour la Collection de cartes
 
     private ArrayList<Carte> cartesAAfficher;
     CollectionAdapter adapter;
     private ListView listeCartes;
     SearchView chercherCarte;
     FournisseurCartes fc;
+    Button btnFiltre;
+    private ProgressBar progressBar1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
         fc = FournisseurCartes.getInstance();
+        // Initialise la liste des filtres (ils se trouvent dans la classe FournisseurCartes)
         checkListesFiltre();
 
-        Button btnFiltre = (Button) findViewById(R.id.btnFiltre);
+        btnFiltre = (Button) findViewById(R.id.btnFiltre);
         listeCartes = (ListView) findViewById(R.id.listeCarte);
         chercherCarte = (SearchView) findViewById(R.id.chercherCarte);
+        progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
 
+        if(fc.getCartes().size()==0){ // Si on n'a pas de cartes chargées, on va les chercher
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint("http://d75e14.sv55.cmaisonneuve.qc.ca/")
+                    .setClient(new OkClient())
+                    .build();
+
+            JsonService jsonService = restAdapter.create(JsonService.class);
+
+            Callback<List<Carte>> callbackCarte = new Callback<List<Carte>>() {
+                @Override
+                public void success(List<Carte> liste, Response response) {
+                    fc.cartes.clear();
+                    fc.leaders.clear();
+                    for (Carte c : liste) {
+                        fc.cartes.add(c);
+                        if(c.type == 3){
+                            fc.leaders.add(c);
+                        }
+                    }
+                    filtrerListeCartesAAfficher();
+                    rafraichirListe();
+                    // On enlève la barre de chargement
+                    progressBar1.setVisibility(View.GONE);
+                }
+                @Override
+                public void failure(RetrofitError error) {
+                    String errorString = error.toString();
+                }
+            };
+            jsonService.getCartes(callbackCarte);
+            // On indique à l'utilisateur qu'on charge les cartes
+            progressBar1.setVisibility(View.VISIBLE);
+        }
+        else{ // S'il y a des cartes, on les affiche
+            filtrerListeCartesAAfficher();
+            rafraichirListe();
+            progressBar1.setVisibility(View.GONE);
+        }
+
+        // SearchView
         chercherCarte.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String query) { // Quand on appuie sur Enter
+                // On filtre les cartes à afficher
                 filtrerListeCartesAAfficher();
-                ArrayList<Carte> temp = new ArrayList<Carte>();
                 for (Carte c : cartesAAfficher) { // Cherche le nom dans les cartes affichées présentement (tient compte des filtres)
-                    if (c.nom.toLowerCase().contains(query.toLowerCase())) {
-                        temp.add(c);
+                    if (!c.nom.toLowerCase().contains(query.toLowerCase())) {
+                        cartesAAfficher.remove(c); // On enlève la carte si elle ne contient pas ce que l'on cherche
                     }
                 }
 
-                cartesAAfficher.clear();
-                cartesAAfficher.addAll(temp);
+                // On réaffiche la liste des cartes
                 rafraichirListe();
+                // clearFocus permet de fermer le clavier automatiquement
                 chercherCarte.clearFocus();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                // Si la SearchView est vide, on affiche toutes les cartes filtrées
                 if(newText.length()==0){
                     filtrerListeCartesAAfficher();
                     rafraichirListe();
@@ -72,15 +127,15 @@ public class CollectionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        filtrerListeCartesAAfficher();
-        rafraichirListe();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        filtrerListeCartesAAfficher();
-        rafraichirListe();
+        if (fc.getCartes().size() > 0) {
+            filtrerListeCartesAAfficher();
+            rafraichirListe();
+        }
     }
 
     protected void rafraichirListe(){
@@ -181,36 +236,28 @@ public class CollectionActivity extends AppCompatActivity {
             if(!b)
                 count++; // Compte le nombre de faux
         }
-        if(count<4) { // S'il y a 4 faux, ne filtre pas la rareté{
-            if (!fc.filtreRarete.get(0)) { // Carte créées et communes
-                for (Carte c : cartesAAfficher) {
-                    if (c.coutCreation <= 30) {
-                        temp.add(c);
-                    }
-                }
-            }
-            if (!fc.filtreRarete.get(1)) { // Cartes rares
-                for (Carte c : cartesAAfficher) {
-                    if (c.coutCreation == 80) {
-                        temp.add(c);
-                    }
-                }
-            }
-            if (!fc.filtreRarete.get(2)) { // Cartes épiques
-                for (Carte c : cartesAAfficher) {
-                    if (c.coutCreation == 200) {
-                        temp.add(c);
-                    }
-                }
-            }
-            if (!fc.filtreRarete.get(3)) { // Cartes légendaires
-                for (Carte c : cartesAAfficher) {
-                    if (c.coutCreation == 800) {
-                        temp.add(c);
-                    }
-                }
-            }
+        if(count<4) { // S'il y a 4 faux, ne filtre pas la rareté
 
+            for(Carte c : cartesAAfficher){ // Pour toutes les cartes qu'il nous reste
+                switch(c.coutCreation){
+                    case 30: // Si c'est une carte commune
+                        if(!fc.filtreRarete.get(0)) {
+                            temp.add(c); // Si on ne veut pas cette rareté, on l'enlève
+                        }
+                    case 80: // Si c'est une carte rare
+                        if(!fc.filtreRarete.get(1)) {
+                            temp.add(c);
+                        }
+                    case 200: // Si c'est une carte épique
+                        if(!fc.filtreRarete.get(2)) {
+                            temp.add(c);
+                        }
+                    case 800: // Si c'est une carte légendaire
+                        if(!fc.filtreRarete.get(3)) {
+                            temp.add(c);
+                        }
+                }
+            }
             cartesAAfficher.removeAll(temp);
         }
     }

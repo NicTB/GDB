@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreationAdapter extends RecyclerView.Adapter<MyViewHolder> {
+
+    // Adapter pour l'activité Creation
+
     private ArrayList<Deck> list;
     Context context;
     public CreationAdapter(ArrayList<Deck> Data, Context c) {

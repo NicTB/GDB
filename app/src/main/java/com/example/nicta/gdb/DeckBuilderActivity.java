@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class DeckBuilderActivity extends AppCompatActivity {
 
+    // Activité de modification de deck
+
     RecyclerView listeCartesFiltre;
     RecyclerView listeCartesMelee;
     RecyclerView listeCartesRange;
@@ -45,6 +47,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
         checkListesFiltre();
         deck = gd.getDeckSelectionne();
 
+        // Prends toutes les cartes neutres et de la faction correspondante au deck sélectionné
         getCartesFaction();
         filtrerCartes();
 
@@ -116,7 +119,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
     }
 
     private void afficherCartesFiltrees(){
-        // Affichage des cartes dans la RecyclerView
+        // Affichage des cartes dans la RecyclerView, en bas de l'écran
         listeCartesFiltre.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(this);
         MyLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -142,7 +145,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
         cartesFiltrees = new ArrayList<>();
         cartesFiltrees.addAll(cartesFaction);
 
-
+        // Filtre de tag
         if(gd.filtreTag>0) { // Si un tag à été sélectionné
             ArrayList<TagCarte> tagCartes = fc.getTagCarte();
             ArrayList<Tags> tags = fc.getTags();
@@ -160,6 +163,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
             }
         }
 
+        // Filtre de type de carte
         ArrayList<Carte> temp = new ArrayList<>();
         int count = 0;
         for(boolean b : gd.filtreType){
@@ -167,7 +171,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
                 count++; // Compte le nombre de faux
         }
         if(count<3) { // S'il y a 3 faux, ne filtre pas le type
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++) { // Il y a 4 type, mais on ne peut pas avoir de carte Leader(4) dans un deck, il ne faut donc pas les afficher
                 if (!gd.filtreType.get(i)) {
                     count++;
                     for (Carte c : cartesFiltrees) {
@@ -193,8 +197,11 @@ public class DeckBuilderActivity extends AppCompatActivity {
 
     protected void rafraichirDeck(){
         deck = gd.getDeckSelectionne();
+        // Fais les listes pour chacune des 4 rangées de l'affichage
         rafraichirListeParRange();
-        // Affichage des cartes dans les RecyclerView du deck
+
+        // Affichage des cartes dans la RecyclerView pour la rangée Melee
+        // Trouvé sur ce site : https://www.codeproject.com/Articles/1152595/Android-Horizontal-ListView-Tutorial
         listeCartesMelee.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManagerMelee = new LinearLayoutManager(this);
         MyLayoutManagerMelee.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -203,7 +210,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
         }
         listeCartesMelee.setLayoutManager(MyLayoutManagerMelee);
 
-        // Affichage des cartes dans les RecyclerView du deck
+        // Affichage des cartes dans la RecyclerView pour la rangée Ranged
         listeCartesRange.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManagerRange = new LinearLayoutManager(this);
         MyLayoutManagerRange.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -212,7 +219,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
         }
         listeCartesRange.setLayoutManager(MyLayoutManagerRange);
 
-        // Affichage des cartes dans les RecyclerView du deck
+        // Affichage des cartes dans la RecyclerView pour la rangée Siege
         listeCartesSiege.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManagerSiege = new LinearLayoutManager(this);
         MyLayoutManagerSiege.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -221,7 +228,7 @@ public class DeckBuilderActivity extends AppCompatActivity {
         }
         listeCartesSiege.setLayoutManager(MyLayoutManagerSiege);
 
-        // Affichage des cartes dans les RecyclerView du deck
+        // Affichage des cartes dans la RecyclerView pour la rangée Event
         listeCartesEvent.setHasFixedSize(true);
         LinearLayoutManager MyLayoutManagerEvent = new LinearLayoutManager(this);
         MyLayoutManagerEvent.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -230,15 +237,17 @@ public class DeckBuilderActivity extends AppCompatActivity {
         }
         listeCartesEvent.setLayoutManager(MyLayoutManagerEvent);
 
+        // Change l'affichage du nombre de carte dans le deck
         txtNombreCartesDeck.setText(String.valueOf(deck.getCartesDeck().size()));
-        if(deck.checkValide()){
-            txtNombreCartesDeck.setTextColor(Color.BLUE);
+        if(deck.checkValide()){ // Si le deck est valide (25<=nbr<=40)
+            txtNombreCartesDeck.setTextColor(Color.BLUE); // On met la couleur en bleu
         }
         else{
-            txtNombreCartesDeck.setTextColor(Color.RED);
+            txtNombreCartesDeck.setTextColor(Color.RED); // Sinon en rouge
         }
     }
 
+    // Trie les cartes du deck en 4 rangées, pour l'affichage
     private void rafraichirListeParRange(){
         cartesMelee = new ArrayList<>();
         cartesRange = new ArrayList<>();
