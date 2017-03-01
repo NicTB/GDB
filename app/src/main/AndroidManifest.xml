@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nicta.gdb">
+    package="com.example.nicta.gdb"
+    android:sharedUserId="NicTB"
+    android:sharedUserLabel="@drawable/letho_of_gulet"
+    android:versionCode="1"
+    android:versionName="string"
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

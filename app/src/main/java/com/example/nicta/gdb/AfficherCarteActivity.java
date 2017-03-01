@@ -19,6 +19,10 @@ public class AfficherCarteActivity extends Dialog {
 
     // Dialogue qui s'ouvre lorsqu'on clique sur une carte dans la Collection
 
+    public AfficherCarteActivity(){
+        super(new Activity());
+    }
+
     public AfficherCarteActivity(Activity a, Carte ca) {
         super(a);
         carte = ca;
