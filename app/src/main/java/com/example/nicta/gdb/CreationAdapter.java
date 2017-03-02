@@ -41,3 +41,4 @@ public class CreationAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return list.size();
     }
 }
+
