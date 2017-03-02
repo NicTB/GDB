@@ -1,5 +1,8 @@
 package com.example.nicta.gdb;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.icu.text.MessagePattern;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -74,6 +77,30 @@ public class ParamDeckActivity extends AppCompatActivity {
 
                 gd.sauvegarderDeck();
                 finish();
+            }
+        });
+
+        btnPartager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                PartageDeck partageDeck = new PartageDeck(gd.getDeckSelectionne());
+                                fc.PartagerDeck(partageDeck);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setMessage("Voulez-vous vraiment partager ce deck?")
+                        .setPositiveButton("Oui", dialogClickListener)
+                        .setNegativeButton("Non", dialogClickListener).show();
             }
         });
 

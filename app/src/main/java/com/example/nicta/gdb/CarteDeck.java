@@ -1,21 +1,21 @@
 package com.example.nicta.gdb;
 
 public class CarteDeck {
-    private int id;
-    private int idCarte;
-    private int idDeck;
+    private int Id;
+    private int IdDeck;
+    private int IdCarte;
 
     public CarteDeck(int idC, int idD){
-        idCarte = idC;
-        idDeck = idD;
+        IdCarte = idC;
+        IdDeck = idD;
     }
 
     protected int getIdCarte(){
-        return idCarte;
+        return IdCarte;
     }
 
     protected int getIdDeck(){
-        return idDeck;
+        return IdDeck;
     }
 
 }

@@ -7,11 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.SignInAccount;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
