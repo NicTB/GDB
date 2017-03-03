@@ -95,11 +95,14 @@ public class CollectionActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) { // Quand on appuie sur Enter
                 // On filtre les cartes à afficher
                 filtrerListeCartesAAfficher();
+                ArrayList<Carte> temp = new ArrayList<Carte>();
                 for (Carte c : cartesAAfficher) { // Cherche le nom dans les cartes affichées présentement (tient compte des filtres)
                     if (!c.nom.toLowerCase().contains(query.toLowerCase())) {
-                        cartesAAfficher.remove(c); // On enlève la carte si elle ne contient pas ce que l'on cherche
+                        temp.remove(c); // On enlève la carte si elle ne contient pas ce que l'on cherche
                     }
                 }
+
+                cartesAAfficher.removeAll(temp);
 
                 // On réaffiche la liste des cartes
                 rafraichirListe();
